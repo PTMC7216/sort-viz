@@ -12,6 +12,7 @@ public class VisualizerPanel extends JPanel {
 
     public VisualizerPanel() {
         this.setBackground(Color.BLACK);
+        this.setPreferredSize(new Dimension(640, 0));
         timer = new Timer(1000, e -> {
             System.out.println("timer");
         });
@@ -28,7 +29,7 @@ public class VisualizerPanel extends JPanel {
 
         int[] vals = IntStream.range(1, 500).toArray();
         for (int val : vals) {
-            g2D.fillRect(1 + val, 560, 1, -val);
+            g2D.fillRect(val, 600, 1, -val);
         }
     }
 
