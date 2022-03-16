@@ -2,9 +2,12 @@ package com.company.sorts;
 
 public class QuickSort implements Sort {
 
-    public int[] start(int[] arr) {
+    private static QuickSort instance = null;
+
+    private QuickSort() {}
+
+    public void start(int[] arr) {
         sort(arr, 0, -1);
-        return arr;
     }
 
     private void sort(int[] arr, int left, int right) {
@@ -36,6 +39,13 @@ public class QuickSort implements Sort {
             arr[i + 1] = arr[i + 1] - arr[right];
         }
         return i + 1;
+    }
+
+    public static QuickSort getInstance() {
+        if (instance == null) {
+            instance = new QuickSort();
+        }
+        return instance;
     }
 
 }

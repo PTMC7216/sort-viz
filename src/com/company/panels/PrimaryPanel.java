@@ -1,5 +1,7 @@
 package com.company.panels;
 
+import com.company.shuffles.DurstenfeldShuffle;
+import com.company.sorts.Sort;
 import com.company.utils.ColorManager;
 
 import javax.swing.*;
@@ -8,27 +10,37 @@ import java.awt.*;
 public class PrimaryPanel extends JPanel {
 
     Timer timer;
-    ControlPanel cPanel;
-    VisualizerPanel vPanel;
+    ControlPanel con;
+    VisualizerPanel vis;
 
     public PrimaryPanel() {
         this.setPreferredSize(new Dimension(800, 600));
         this.setBackground(ColorManager.tertiary);
 
-        vPanel = new VisualizerPanel();
-        cPanel = new ControlPanel(vPanel.vals);
+        vis = new VisualizerPanel();
+        con = new ControlPanel();
 
         this.setLayout(new BorderLayout(2, 0));
-        this.add(cPanel, BorderLayout.WEST);
-        this.add(vPanel, BorderLayout.CENTER);
+        this.add(con, BorderLayout.WEST);
+        this.add(vis, BorderLayout.CENTER);
+
+        con.sortButton.addActionListener(e -> {
+            Sort sort = con.sortComboBox.getSort();
+            sort.start(vis.vals);
+        });
+
+        con.shuffleButton.addActionListener(e -> {
+            DurstenfeldShuffle shuffle = new DurstenfeldShuffle();
+            shuffle.start(vis.vals);
+        });
 
         // TODO: Pause timer while not sorting.
-        timer = new Timer(cPanel.getSpeed(), e -> {
-            if (cPanel.getSpeed() != timer.getDelay()) {
-                timer.setDelay(cPanel.getSpeed());
+        timer = new Timer(con.speedSlider.getValue(), e -> {
+            if (con.speedSlider.getValue() != timer.getDelay()) {
+                timer.setDelay(con.speedSlider.getValue());
                 timer.restart();
             }
-            vPanel.repaint();
+            vis.repaint();
         });
         timer.start();
 

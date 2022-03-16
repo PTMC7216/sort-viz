@@ -2,7 +2,11 @@ package com.company.sorts;
 
 public class BubbleSort implements Sort {
 
-    public int[] start(int[] arr) {
+    private static BubbleSort instance = null;
+
+    private BubbleSort() {}
+
+    public void start(int[] arr) {
         int index_len = arr.length - 1;
         boolean loop = true;
         while (loop) {
@@ -17,7 +21,13 @@ public class BubbleSort implements Sort {
             }
             index_len--;
         }
-        return arr;
+    }
+
+    public static BubbleSort getInstance() {
+        if (instance == null) {
+            instance = new BubbleSort();
+        }
+        return instance;
     }
 
 }

@@ -1,6 +1,5 @@
 package com.company.buttons;
 
-import com.company.shuffles.DurstenfeldShuffle;
 import com.company.utils.ColorManager;
 import com.company.utils.FontManager;
 
@@ -9,9 +8,7 @@ import java.awt.*;
 
 public class ShuffleButton extends JButton {
 
-    DurstenfeldShuffle shuffle;
-
-    public ShuffleButton(int[] arr) {
+    public ShuffleButton() {
         this.setPreferredSize(new Dimension(65, 20));
 
         this.setBackground(ColorManager.secondary);
@@ -21,12 +18,6 @@ public class ShuffleButton extends JButton {
         this.setText("Shuffle");
         this.setFocusable(false);
 
-        shuffle = new DurstenfeldShuffle();
-
-        this.addActionListener(e -> {
-            System.out.println("Shuffle");
-            shuffle.start(arr);
-        });
     }
 
 }

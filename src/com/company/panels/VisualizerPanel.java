@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 public class VisualizerPanel extends JPanel {
 
-    public int[] vals;
+    int[] vals;
 
     public VisualizerPanel() {
         this.setPreferredSize(new Dimension(640, 0));

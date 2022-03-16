@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class SortComboBox extends JComboBox<String> {
 
-    public String selected;
+    String selected;
 
     public SortComboBox() {
         this.setUI(new SortComboBoxUI());
@@ -25,9 +25,9 @@ public class SortComboBox extends JComboBox<String> {
     public Sort getSort() {
         switch (selected) {
             case "Quicksort":
-                return new QuickSort();
+                return QuickSort.getInstance();
             case "Bubble sort":
-                return new BubbleSort();
+                return BubbleSort.getInstance();
         }
         return null;
     }
