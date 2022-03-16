@@ -1,6 +1,6 @@
 package com.company.sorts;
 
-public class BubbleSort {
+public class BubbleSort implements Sort {
 
     public int[] start(int[] arr) {
         int index_len = arr.length - 1;

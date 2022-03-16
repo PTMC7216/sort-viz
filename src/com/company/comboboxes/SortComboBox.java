@@ -1,11 +1,16 @@
 package com.company.comboboxes;
 
+import com.company.sorts.BubbleSort;
+import com.company.sorts.QuickSort;
+import com.company.sorts.Sort;
+
 import javax.swing.*;
 
 public class SortComboBox extends JComboBox<String> {
 
-    public SortComboBox() {
+    public String selected;
 
+    public SortComboBox() {
         this.setUI(new SortComboBoxUI());
 
         String[] items = {"Quicksort", "Bubble sort"};
@@ -13,9 +18,18 @@ public class SortComboBox extends JComboBox<String> {
             this.addItem(item);
         }
 
-        this.addActionListener(e -> {
-            System.out.println(this.getSelectedItem());
-        });
+        selected = (String)this.getSelectedItem();
+        this.addActionListener(e -> selected = (String)this.getSelectedItem());
+    }
+
+    public Sort getSort() {
+        switch (selected) {
+            case "Quicksort":
+                return new QuickSort();
+            case "Bubble sort":
+                return new BubbleSort();
+        }
+        return null;
     }
 
 }

@@ -6,15 +6,15 @@ import com.company.utils.FontManager;
 import javax.swing.*;
 import java.awt.*;
 
-public class SortingSpeedSlider extends JSlider {
+public class SpeedSlider extends JSlider {
 
     JLabel value;
     JLabel id;
     JPanel panel;
 
-    public SortingSpeedSlider() {
-        this.setBackground(ColorManager.secondary);
+    public SpeedSlider() {
         this.setPreferredSize(new Dimension(113, 16));
+        this.setBackground(ColorManager.secondary);
         this.setOrientation(0);
         this.setMinimum(1);
         this.setMaximum(100);
@@ -26,10 +26,7 @@ public class SortingSpeedSlider extends JSlider {
         value.setFont(FontManager.secondary);
         value.setPreferredSize(new Dimension(22, 12));
 
-        this.addChangeListener(e -> {
-            value.setText(String.valueOf(this.getValue()));
-            // TODO: Send value to repaint timer.
-        });
+        this.addChangeListener(e -> value.setText(String.valueOf(this.getValue())));
     }
 
     public JPanel container() {

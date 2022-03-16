@@ -1,8 +1,8 @@
 package com.company.sorts;
 
-public class QuickSort {
+public class QuickSort implements Sort {
 
-    public int[] sort(int[] arr) {
+    public int[] start(int[] arr) {
         sort(arr, 0, -1);
         return arr;
     }

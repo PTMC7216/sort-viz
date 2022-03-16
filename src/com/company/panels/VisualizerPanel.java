@@ -8,15 +8,13 @@ import java.util.stream.IntStream;
 
 public class VisualizerPanel extends JPanel {
 
-    Timer timer;
+    public int[] vals;
 
     public VisualizerPanel() {
-        this.setBackground(Color.BLACK);
         this.setPreferredSize(new Dimension(640, 0));
-        timer = new Timer(1000, e -> {
-            System.out.println("timer");
-        });
-        timer.start();
+        this.setBackground(Color.BLACK);
+
+        vals = IntStream.range(1, 500).toArray();
     }
 
     public void paintComponent(Graphics g) {
@@ -25,11 +23,8 @@ public class VisualizerPanel extends JPanel {
 
         g2D.setPaint(ColorManager.tertiary);
 
-        // TODO: Sort/shuffle vals.
-
-        int[] vals = IntStream.range(1, 500).toArray();
-        for (int val : vals) {
-            g2D.fillRect(val, 600, 1, -val);
+        for (int i = 0; i < vals.length; i++) {
+            g2D.fillRect(i, 600, 1, -vals[i]);
         }
     }
 

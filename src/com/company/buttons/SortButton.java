@@ -9,7 +9,6 @@ import java.awt.*;
 public class SortButton extends JButton {
 
     public SortButton() {
-
         this.setPreferredSize(new Dimension(65, 20));
 
         this.setBackground(ColorManager.secondary);
@@ -19,10 +18,6 @@ public class SortButton extends JButton {
         this.setText("Sort");
         this.setFocusable(false);
 
-        this.addActionListener(e -> {
-            System.out.println("Sort");
-            // TODO: Apply sort logic.
-        });
     }
 
 }

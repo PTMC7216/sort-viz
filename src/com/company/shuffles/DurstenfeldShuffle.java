@@ -2,7 +2,7 @@ package com.company.shuffles;
 
 public class DurstenfeldShuffle {
 
-    public int[] shuffle(int[] arr) {
+    public int[] start(int[] arr) {
         int right = arr.length - 1;
         while (right > 0) {
             int rand = (int) (Math.random() * right);
