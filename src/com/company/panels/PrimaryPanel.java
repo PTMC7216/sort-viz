@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class PrimaryPanel extends JPanel {
 
-    Timer timer;
+    Timer repaintTick;
     ControlPanel con;
     VisualizerPanel vis;
 
@@ -17,6 +17,7 @@ public class PrimaryPanel extends JPanel {
         this.setPreferredSize(new Dimension(800, 600));
         this.setBackground(ColorManager.tertiary);
 
+        repaintTick = new Timer(10, e -> repaint());
         vis = new VisualizerPanel();
         con = new ControlPanel();
 
@@ -26,7 +27,14 @@ public class PrimaryPanel extends JPanel {
 
         con.sortButton.addActionListener(e -> {
             Sort sort = con.sortComboBox.getSort();
-            sort.start(vis.vals);
+            SwingWorker<Void, Void> sortWorker = new SwingWorker<>() {
+                @Override
+                protected Void doInBackground() throws Exception {
+                    sort.start(vis.vals, 2);
+                    return null;
+                }
+            };
+            sortWorker.execute();
         });
 
         con.shuffleButton.addActionListener(e -> {
@@ -34,16 +42,16 @@ public class PrimaryPanel extends JPanel {
             shuffle.start(vis.vals);
         });
 
-        // TODO: Pause timer while not sorting.
-        timer = new Timer(con.speedSlider.getValue(), e -> {
-            if (con.speedSlider.getValue() != timer.getDelay()) {
-                timer.setDelay(con.speedSlider.getValue());
-                timer.restart();
-            }
-            vis.repaint();
-        });
-        timer.start();
+//        timer = new Timer(con.speedSlider.getValue(), e -> {
+//            if (con.speedSlider.getValue() != timer.getDelay()) {
+//                timer.setDelay(con.speedSlider.getValue());
+//                timer.restart();
+//            }
+//            vis.repaint();
+//        });
+//        timer.start();
 
+        repaintTick.start();
     }
 
 }
