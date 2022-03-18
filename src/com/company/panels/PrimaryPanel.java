@@ -9,7 +9,6 @@ import java.awt.*;
 
 public class PrimaryPanel extends JPanel {
 
-    Timer repaintTick;
     ControlPanel con;
     VisualizerPanel vis;
 
@@ -17,9 +16,8 @@ public class PrimaryPanel extends JPanel {
         this.setPreferredSize(new Dimension(800, 600));
         this.setBackground(ColorManager.tertiary);
 
-        repaintTick = new Timer(10, e -> repaint());
-        vis = new VisualizerPanel();
         con = new ControlPanel();
+        vis = new VisualizerPanel();
 
         this.setLayout(new BorderLayout(2, 0));
         this.add(con, BorderLayout.WEST);
@@ -30,7 +28,7 @@ public class PrimaryPanel extends JPanel {
             SwingWorker<Void, Void> sortWorker = new SwingWorker<>() {
                 @Override
                 protected Void doInBackground() {
-                    sort.start(vis.vals, 10);
+                    sort.start(vis, 10);
                     return null;
                 }
             };
@@ -39,7 +37,8 @@ public class PrimaryPanel extends JPanel {
 
         con.shuffleButton.addActionListener(e -> {
             DurstenfeldShuffle shuffle = new DurstenfeldShuffle();
-            shuffle.start(vis.vals);
+            shuffle.start(vis.arr);
+            repaint();
         });
 
 //        timer = new Timer(con.speedSlider.getValue(), e -> {
@@ -50,8 +49,6 @@ public class PrimaryPanel extends JPanel {
 //            vis.repaint();
 //        });
 //        timer.start();
-
-        repaintTick.start();
     }
 
 }

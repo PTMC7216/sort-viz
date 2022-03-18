@@ -1,6 +1,6 @@
 package com.company.sorts;
 
-import com.company.utils.Util;
+import com.company.panels.VisualizerPanel;
 
 public class BubbleSort implements Sort {
 
@@ -8,7 +8,8 @@ public class BubbleSort implements Sort {
 
     private BubbleSort() {}
 
-    public void start(int[] arr, int sortSpeed) {
+    public void start(VisualizerPanel vis, int sortSpeed) {
+        int[] arr = vis.arr;
         int index_len = arr.length - 1;
         int step = 0;
         boolean loop = true;
@@ -18,10 +19,10 @@ public class BubbleSort implements Sort {
                 step++;
                 if (step == sortSpeed) {
                     step = 0;
-                    Util.sleep();
+                    vis.sleep();
                 }
                 if (arr[i] > arr[i + 1]) {
-                    Util.swap(arr, i, i + 1);
+                    vis.swap(arr, i, i + 1);
                     loop = true;
                 }
             }

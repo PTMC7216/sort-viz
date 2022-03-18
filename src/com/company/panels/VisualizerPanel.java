@@ -8,13 +8,13 @@ import java.util.stream.IntStream;
 
 public class VisualizerPanel extends JPanel {
 
-    int[] vals;
+    public int[] arr;
 
     public VisualizerPanel() {
         this.setPreferredSize(new Dimension(640, 0));
         this.setBackground(Color.BLACK);
 
-        vals = IntStream.range(1, 500).toArray();
+        arr = IntStream.range(1, 500).toArray();
     }
 
     public void paintComponent(Graphics g) {
@@ -23,8 +23,21 @@ public class VisualizerPanel extends JPanel {
 
         g2D.setPaint(ColorManager.tertiary);
 
-        for (int i = 0; i < vals.length; i++) {
-            g2D.fillRect(i, 600, 1, -vals[i]);
+        for (int i = 0; i < arr.length; i++) {
+            g2D.fillRect(i, 600, 1, -arr[i]);
+        }
+    }
+
+    public void swap(int[] arr, int i, int j) {
+        arr[i] = (arr[i] + arr[j]) - (arr[j] = arr[i]);
+        repaint();
+    }
+
+    public void sleep() {
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
