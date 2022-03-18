@@ -9,8 +9,11 @@ import java.awt.*;
 
 public class PrimaryPanel extends JPanel {
 
-    ControlPanel con;
-    VisualizerPanel vis;
+    private final ControlPanel con;
+    private final VisualizerPanel vis;
+    private final DurstenfeldShuffle shuffle;
+
+    private Sort sort;
 
     public PrimaryPanel() {
         this.setPreferredSize(new Dimension(800, 600));
@@ -18,37 +21,31 @@ public class PrimaryPanel extends JPanel {
 
         con = new ControlPanel();
         vis = new VisualizerPanel();
+        shuffle = new DurstenfeldShuffle();
 
         this.setLayout(new BorderLayout(2, 0));
         this.add(con, BorderLayout.WEST);
         this.add(vis, BorderLayout.CENTER);
 
         con.sortButton.addActionListener(e -> {
-            Sort sort = con.sortComboBox.getSort();
-            SwingWorker<Void, Void> sortWorker = new SwingWorker<>() {
-                @Override
-                protected Void doInBackground() {
-                    sort.start(vis, 10);
-                    return null;
-                }
-            };
-            sortWorker.execute();
+            // TODO: Track previous sort when changing sorts mid-sort.
+            sort = con.sortComboBox.getSort();
+            if (vis.isSorting()) {
+                sort.stop();
+            } else {
+                shuffle.start(vis);
+                sort.start(vis, con.speedSlider.getValue());
+            }
         });
 
         con.shuffleButton.addActionListener(e -> {
-            DurstenfeldShuffle shuffle = new DurstenfeldShuffle();
-            shuffle.start(vis.arr);
-            repaint();
+            sort = con.sortComboBox.getSort();
+            if (vis.isSorting()) {
+                sort.stop();
+            }
+            shuffle.start(vis);
         });
 
-//        timer = new Timer(con.speedSlider.getValue(), e -> {
-//            if (con.speedSlider.getValue() != timer.getDelay()) {
-//                timer.setDelay(con.speedSlider.getValue());
-//                timer.restart();
-//            }
-//            vis.repaint();
-//        });
-//        timer.start();
     }
 
 }

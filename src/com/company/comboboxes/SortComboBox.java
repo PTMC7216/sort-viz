@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class SortComboBox extends JComboBox<String> {
 
-    String selected;
+    private String selected;
 
     public SortComboBox() {
         this.setUI(new SortComboBoxUI());

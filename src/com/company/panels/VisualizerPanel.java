@@ -8,13 +8,29 @@ import java.util.stream.IntStream;
 
 public class VisualizerPanel extends JPanel {
 
-    public int[] arr;
+    private int[] arr = IntStream.range(1, 500).toArray();
+    private boolean sorted = true;
+    private boolean sorting = false;
 
     public VisualizerPanel() {
         this.setPreferredSize(new Dimension(640, 0));
         this.setBackground(Color.BLACK);
+    }
 
-        arr = IntStream.range(1, 500).toArray();
+    public int[] getArr() {
+        return this.arr;
+    }
+
+    public boolean isSorted() {
+        return this.sorted;
+    }
+
+    public boolean isSorting() {
+        return this.sorting;
+    }
+
+    public void setSorting(boolean bool) {
+        this.sorting = bool;
     }
 
     public void paintComponent(Graphics g) {

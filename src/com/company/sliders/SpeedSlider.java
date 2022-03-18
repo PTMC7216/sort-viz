@@ -8,16 +8,16 @@ import java.awt.*;
 
 public class SpeedSlider extends JSlider {
 
-    JLabel value;
-    JLabel id;
-    JPanel panel;
+    private final JLabel id;
+    private final JLabel value;
 
     public SpeedSlider() {
         this.setPreferredSize(new Dimension(113, 16));
         this.setBackground(ColorManager.secondary);
         this.setOrientation(0);
         this.setMinimum(1);
-        this.setMaximum(100);
+        this.setMaximum(10);
+        this.setValue(2);
 
         id = new JLabel("Sorting speed");
         id.setFont(FontManager.secondary);
@@ -30,7 +30,7 @@ public class SpeedSlider extends JSlider {
     }
 
     public JPanel container() {
-        panel = new JPanel();
+        JPanel panel = new JPanel();
         panel.setBackground(ColorManager.secondary);
         panel.setBorder(BorderFactory.createLineBorder(ColorManager.primary, 1));
         panel.setLayout(new GridBagLayout());

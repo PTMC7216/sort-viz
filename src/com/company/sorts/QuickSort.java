@@ -2,17 +2,43 @@ package com.company.sorts;
 
 import com.company.panels.VisualizerPanel;
 
-public class QuickSort implements Sort {
+import javax.swing.*;
+
+public class QuickSort extends Sort {
 
     private static QuickSort instance = null;
+    private SwingWorker<Void, Void> worker;
 
     private QuickSort() {}
 
     public void start(VisualizerPanel vis, int sortSpeed) {
-        sort(vis, vis.arr, 0, -128, sortSpeed);
+        worker = new SwingWorker<>() {
+            @Override
+            protected Void doInBackground() {
+                System.out.printf("Worker started: %s%n", worker);
+                vis.setSorting(true);
+                sort(vis, vis.getArr(), 0, -128, sortSpeed);
+                return null;
+            }
+            @Override
+            protected void done() {
+                super.done();
+                vis.setSorting(false);
+                System.out.printf("Worker finished: %s%n", worker);
+            }
+        };
+        worker.execute();
+    }
+
+    public void stop() {
+        if (worker != null) {
+            worker.cancel(false);
+            System.out.printf("Worker stopped: %s%n", worker);
+        }
     }
 
     private void sort(VisualizerPanel vis, int[] arr, int left, int right, int sortSpeed) {
+        if (worker.isCancelled()) return;
         if (right == -128) {
             right = arr.length - 1;
         }
@@ -27,6 +53,7 @@ public class QuickSort implements Sort {
         int step = 0;
         int i = left - 1;
         for (int j = left; j < right; j++) {
+            if (worker.isCancelled()) return 0;
             step++;
             if (step == sortSpeed) {
                 step = 0;
