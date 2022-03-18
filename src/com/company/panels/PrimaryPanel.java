@@ -29,8 +29,8 @@ public class PrimaryPanel extends JPanel {
             Sort sort = con.sortComboBox.getSort();
             SwingWorker<Void, Void> sortWorker = new SwingWorker<>() {
                 @Override
-                protected Void doInBackground() throws Exception {
-                    sort.start(vis.vals, 2);
+                protected Void doInBackground() {
+                    sort.start(vis.vals, 10);
                     return null;
                 }
             };

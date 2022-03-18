@@ -1,5 +1,7 @@
 package com.company.sorts;
 
+import com.company.utils.Util;
+
 public class QuickSort implements Sort {
 
     private static QuickSort instance = null;
@@ -7,11 +9,11 @@ public class QuickSort implements Sort {
     private QuickSort() {}
 
     public void start(int[] arr, int sortSpeed) {
-        sort(arr, 0, -1, sortSpeed);
+        sort(arr, 0, -128, sortSpeed);
     }
 
     private void sort(int[] arr, int left, int right, int sortSpeed) {
-        if (right == -1) {
+        if (right == -128) {
             right = arr.length - 1;
         }
         if (left < right) {
@@ -28,25 +30,18 @@ public class QuickSort implements Sort {
             step++;
             if (step == sortSpeed) {
                 step = 0;
-                try {
-                    Thread.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                Util.sleep();
             }
             if (arr[j] <= arr[right]) {
                 i++;
                 if (i != j) {
-                    arr[i] = arr[i] + arr[j];
-                    arr[j] = arr[i] - arr[j];
-                    arr[i] = arr[i] - arr[j];
+                    Util.swap(arr, i, j);
                 }
             }
         }
         if (arr[i + 1] != arr[right]) {
-            arr[i + 1] = arr[i + 1] + arr[right];
-            arr[right] = arr[i + 1] - arr[right];
-            arr[i + 1] = arr[i + 1] - arr[right];
+            Util.sleep();
+            Util.swap(arr, i + 1, right);
         }
         return i + 1;
     }

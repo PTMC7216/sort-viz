@@ -18,6 +18,8 @@ public class SortButton extends JButton {
         this.setText("Sort");
         this.setFocusable(false);
 
+        // TODO: Add actionListener to toggle between Sort and Pause or Stop.
+
     }
 
 }

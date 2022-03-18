@@ -1,5 +1,7 @@
 package com.company.sorts;
 
+import com.company.utils.Util;
+
 public class BubbleSort implements Sort {
 
     private static BubbleSort instance = null;
@@ -16,16 +18,10 @@ public class BubbleSort implements Sort {
                 step++;
                 if (step == sortSpeed) {
                     step = 0;
-                    try {
-                        Thread.sleep(1);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Util.sleep();
                 }
                 if (arr[i] > arr[i + 1]) {
-                    arr[i] =     arr[i] + arr[i + 1];
-                    arr[i + 1] = arr[i] - arr[i + 1];
-                    arr[i] =     arr[i] - arr[i + 1];
+                    Util.swap(arr, i, i + 1);
                     loop = true;
                 }
             }
