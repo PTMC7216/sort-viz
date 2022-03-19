@@ -24,6 +24,7 @@ public class QuickSort extends Sort {
             protected void done() {
                 super.done();
                 vis.setSorting(false);
+                vis.getQueue().poll();
                 System.out.printf("Worker finished: %s%n", worker);
             }
         };
@@ -33,7 +34,6 @@ public class QuickSort extends Sort {
     public void stop() {
         if (worker != null) {
             worker.cancel(false);
-            System.out.printf("Worker stopped: %s%n", worker);
         }
     }
 

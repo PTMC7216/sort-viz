@@ -17,7 +17,7 @@ public class SpeedSlider extends JSlider {
         this.setOrientation(0);
         this.setMinimum(1);
         this.setMaximum(10);
-        this.setValue(2);
+        this.setValue(1);
 
         id = new JLabel("Sorting speed");
         id.setFont(FontManager.secondary);

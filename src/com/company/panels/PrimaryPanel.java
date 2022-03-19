@@ -6,6 +6,7 @@ import com.company.utils.ColorManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Queue;
 
 public class PrimaryPanel extends JPanel {
 
@@ -14,6 +15,8 @@ public class PrimaryPanel extends JPanel {
     private final DurstenfeldShuffle shuffle;
 
     private Sort sort;
+    private int speed;
+    private Queue<Sort> queue;
 
     public PrimaryPanel() {
         this.setPreferredSize(new Dimension(800, 600));
@@ -28,20 +31,22 @@ public class PrimaryPanel extends JPanel {
         this.add(vis, BorderLayout.CENTER);
 
         con.sortButton.addActionListener(e -> {
-            // TODO: Track previous sort when changing sorts mid-sort.
             sort = con.sortComboBox.getSort();
+            speed = con.speedSlider.getValue();
+            queue = vis.getQueue();
             if (vis.isSorting()) {
-                sort.stop();
+                queue.element().stop();
             } else {
-                shuffle.start(vis);
-                sort.start(vis, con.speedSlider.getValue());
+                queue.offer(sort);
+                queue.element().start(vis, speed);
             }
         });
 
         con.shuffleButton.addActionListener(e -> {
             sort = con.sortComboBox.getSort();
+            queue = vis.getQueue();
             if (vis.isSorting()) {
-                sort.stop();
+                queue.element().stop();
             }
             shuffle.start(vis);
         });
