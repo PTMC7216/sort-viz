@@ -8,17 +8,16 @@ import java.awt.*;
 public class PrimaryFrame extends JFrame {
 
     public PrimaryFrame() {
-        this.setTitle("Visualizer");
-        this.setIconImage(new ImageIcon("./src/com/company/icon.png").getImage());
-        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-        this.getContentPane().setPreferredSize(new Dimension(800, 600));
-        this.setMinimumSize(new Dimension(340, 140));
+        setTitle("Visualizer");
+        setIconImage(new ImageIcon("./src/com/company/icon.png").getImage());
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        getContentPane().setPreferredSize(new Dimension(800, 600));
+        setMinimumSize(new Dimension(340, 174));
 
-        PrimaryPanel pPanel = new PrimaryPanel();
-        this.add(pPanel);
+        add(new PrimaryPanel());
 
-        this.pack();
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 }

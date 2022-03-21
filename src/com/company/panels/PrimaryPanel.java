@@ -18,15 +18,15 @@ public class PrimaryPanel extends JPanel {
     private Queue<Sort> queue;
 
     public PrimaryPanel() {
-        this.setBackground(Color.GRAY);
+        setBackground(Color.GRAY);
 
         con = new ControlPanel();
         vis = new VisualizerPanel();
         shuffle = new DurstenfeldShuffle();
 
-        this.setLayout(new BorderLayout(2, 0));
-        this.add(con, BorderLayout.WEST);
-        this.add(vis, BorderLayout.CENTER);
+        setLayout(new BorderLayout(2, 0));
+        add(con, BorderLayout.WEST);
+        add(vis, BorderLayout.CENTER);
 
         con.sortButton.addActionListener(e -> {
             sort = con.sortComboBox.getSort();
@@ -41,6 +41,7 @@ public class PrimaryPanel extends JPanel {
         });
 
         con.shuffleButton.addActionListener(e -> {
+            vis.setArr(con.rangeSlider.getValue());
             sort = con.sortComboBox.getSort();
             queue = vis.getQueue();
             if (vis.isSorting()) {

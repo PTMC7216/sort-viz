@@ -11,15 +11,15 @@ public class SortComboBox extends JComboBox<String> {
     private String selected;
 
     public SortComboBox() {
-        this.setUI(new SortComboBoxUI());
+        setUI(new SortComboBoxUI());
 
         String[] items = {"Quicksort", "Bubble sort"};
         for (String item : items) {
-            this.addItem(item);
+            addItem(item);
         }
 
-        selected = (String)this.getSelectedItem();
-        this.addActionListener(e -> selected = (String)this.getSelectedItem());
+        selected = (String)getSelectedItem();
+        addActionListener(e -> selected = (String)getSelectedItem());
     }
 
     public Sort getSort() {

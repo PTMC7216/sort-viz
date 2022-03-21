@@ -24,7 +24,7 @@ public class SortComboBoxUI extends BasicComboBoxUI {
 
         comboBox.setFont(FontManager.secondary);
 
-        comboBox.setPreferredSize(new Dimension(135, 18));
+        comboBox.setPreferredSize(new Dimension(147, 18));
 
         comboBox.setRenderer(new Renderer());
 
@@ -57,13 +57,13 @@ public class SortComboBoxUI extends BasicComboBoxUI {
 
             super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 
-            this.setHorizontalAlignment(SwingConstants.CENTER);
+            setHorizontalAlignment(SwingConstants.CENTER);
 
             if (isSelected) {
-                this.setBackground(ColorManager.primary);
+                setBackground(ColorManager.primary);
             }
             else {
-                this.setBackground(ColorManager.secondary);
+                setBackground(ColorManager.secondary);
             }
 
             return this;

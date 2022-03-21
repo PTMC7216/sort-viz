@@ -16,13 +16,14 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
     private int resX;
     private int resY;
 
-    private final int[] arr = IntStream.range(1, 512).toArray();
+    private int[] arr = IntStream.rangeClosed(1, 512).toArray();
+    private int[] highlight = new int[512];
     private final Queue<Sort> queue = new LinkedList<>();
     private boolean sorting = false;
 
     public VisualizerPanel() {
-        this.setBackground(Color.BLACK);
-        this.addComponentListener(this);
+        setBackground(Color.BLACK);
+        addComponentListener(this);
     }
 
     public Queue<Sort> getQueue() {
@@ -31,6 +32,11 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
 
     public int[] getArr() {
         return this.arr;
+    }
+
+    public void setArr(int arrSize) {
+        this.arr = IntStream.rangeClosed(1, arrSize).toArray();
+        this.highlight = new int[arrSize];
     }
 
     public boolean isSorting() {
@@ -79,8 +85,8 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
 
     @Override
     public void componentResized(ComponentEvent e) {
-        resX = this.getWidth();
-        resY = this.getHeight();
+        resX = getWidth();
+        resY = getHeight();
     }
 
     @Override
