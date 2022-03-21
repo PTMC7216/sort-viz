@@ -5,20 +5,24 @@ import com.company.utils.ColorManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.stream.IntStream;
 
-public class VisualizerPanel extends JPanel {
+public class VisualizerPanel extends JPanel implements ComponentListener {
+
+    private int resX;
+    private int resY;
 
     private final int[] arr = IntStream.range(1, 512).toArray();
     private final Queue<Sort> queue = new LinkedList<>();
-    private boolean sorted = true;
     private boolean sorting = false;
 
     public VisualizerPanel() {
-        this.setPreferredSize(new Dimension(640, 0));
         this.setBackground(Color.BLACK);
+        this.addComponentListener(this);
     }
 
     public Queue<Sort> getQueue() {
@@ -27,10 +31,6 @@ public class VisualizerPanel extends JPanel {
 
     public int[] getArr() {
         return this.arr;
-    }
-
-    public boolean isSorted() {
-        return this.sorted;
     }
 
     public boolean isSorting() {
@@ -48,13 +48,19 @@ public class VisualizerPanel extends JPanel {
         drawArr(g2D);
     }
 
-    // TODO: Draw rects in relation to panel size.
     // TODO: Change rect color during swap.
     private void drawArr(Graphics2D g2D) {
         g2D.setPaint(ColorManager.tertiary);
 
+        float rectWidthMax = (float) resX / arr.length;
+        float rectHeightMax = (float) resY / arr.length;
+
         for (int i = 0; i < arr.length; i++) {
-            g2D.fillRect(i, 600, 1, -arr[i]);
+            g2D.fillRect(
+                    (int)(i * rectWidthMax),
+                    resY,
+                    (int)(1 + rectWidthMax),
+                    (int)(-arr[i] * rectHeightMax));
         }
     }
 
@@ -71,4 +77,24 @@ public class VisualizerPanel extends JPanel {
         }
     }
 
+    @Override
+    public void componentResized(ComponentEvent e) {
+        resX = this.getWidth();
+        resY = this.getHeight();
+    }
+
+    @Override
+    public void componentMoved(ComponentEvent e) {
+
+    }
+
+    @Override
+    public void componentShown(ComponentEvent e) {
+
+    }
+
+    @Override
+    public void componentHidden(ComponentEvent e) {
+
+    }
 }

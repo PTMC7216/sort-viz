@@ -2,7 +2,6 @@ package com.company.panels;
 
 import com.company.shuffles.DurstenfeldShuffle;
 import com.company.sorts.Sort;
-import com.company.utils.ColorManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,8 +18,7 @@ public class PrimaryPanel extends JPanel {
     private Queue<Sort> queue;
 
     public PrimaryPanel() {
-        this.setPreferredSize(new Dimension(800, 600));
-        this.setBackground(ColorManager.tertiary);
+        this.setBackground(Color.GRAY);
 
         con = new ControlPanel();
         vis = new VisualizerPanel();
