@@ -1,5 +1,6 @@
 package com.company.sliders;
 
+import com.company.fields.ValueField;
 import com.company.utils.ColorManager;
 import com.company.utils.FontManager;
 
@@ -9,7 +10,7 @@ import java.awt.*;
 public class Slider extends JSlider {
 
     protected final JLabel id;
-    protected final JLabel value;
+    protected final ValueField value;
 
     public Slider() {
         setPreferredSize(new Dimension(113, 16));
@@ -22,9 +23,7 @@ public class Slider extends JSlider {
         id = new JLabel("Slider");
         id.setFont(FontManager.secondary);
 
-        value = new JLabel(String.valueOf(getValue()));
-        value.setFont(FontManager.secondary);
-        value.setPreferredSize(new Dimension(32, 12));
+        value = new ValueField();
 
         addChangeListener(e -> value.setText(String.valueOf(getValue())));
     }
