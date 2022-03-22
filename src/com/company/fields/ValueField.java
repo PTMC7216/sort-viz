@@ -16,13 +16,14 @@ public class ValueField extends JFormattedTextField {
         NumberFormatter formatter = new NumberFormatter(format);
         formatter.setAllowsInvalid(false);
         formatter.setMinimum(0);
-        formatter.setMaximum(1024);
+        formatter.setMaximum(9999);
         setFormatter(formatter);
 
         setPreferredSize(new Dimension(32, 12));
         setBorder(BorderFactory.createLineBorder(ColorManager.primary, 1));
         setBackground(ColorManager.secondary);
         setFont(FontManager.secondary);
+        setHorizontalAlignment(CENTER);
     }
 
 }

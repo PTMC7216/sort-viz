@@ -57,7 +57,7 @@ public class SortComboBoxUI extends BasicComboBoxUI {
 
             super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 
-            setHorizontalAlignment(SwingConstants.CENTER);
+            setHorizontalAlignment(CENTER);
 
             if (isSelected) {
                 setBackground(ColorManager.primary);

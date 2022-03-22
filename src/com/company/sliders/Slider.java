@@ -24,6 +24,12 @@ public class Slider extends JSlider {
         id.setFont(FontManager.secondary);
 
         value = new ValueField();
+        value.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, ColorManager.primary));
+        value.addActionListener(e -> setValue((Integer) value.getValue()));
+
+        // TODO: Fix ValueField allowing invalid characters
+        //  when clicking in and out of different ValueFields
+        //  despite formatter.setAllowsInvalid(false)
 
         addChangeListener(e -> value.setText(String.valueOf(getValue())));
     }
@@ -39,25 +45,20 @@ public class Slider extends JSlider {
         gbc.gridy = 0;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
-        gbc.weightx = 1;
-        gbc.weighty = 1;
         panel.add(id, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
-        gbc.weightx = 1;
-        gbc.weighty = 1;
         panel.add(this, gbc);
 
         gbc.gridx = 1;
-        gbc.gridy = 1;
+        gbc.gridy = 0;
         gbc.gridwidth = 1;
-        gbc.gridheight = 1;
+        gbc.gridheight = 2;
         gbc.ipady = 1;
-        gbc.weightx = 1;
-        gbc.weighty = 1;
+        gbc.fill = 1;
         panel.add(value, gbc);
 
         return panel;
