@@ -1,35 +1,30 @@
 package com.company.sliders;
 
-import com.company.fields.ValueField;
+import com.company.fields.IntField;
 import com.company.utils.ColorManager;
 import com.company.utils.FontManager;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Slider extends JSlider {
+public abstract class Slider extends JSlider {
 
     protected final JLabel id;
-    protected final ValueField value;
+    protected final IntField value;
 
-    public Slider() {
+    public Slider(String label, int maxCharacters) {
         setPreferredSize(new Dimension(113, 16));
         setBackground(ColorManager.secondary);
         setOrientation(0);
         setMinimum(1);
-        setMaximum(1000);
+        setMaximum(1);
         setValue(1);
 
-        id = new JLabel("Slider");
+        id = new JLabel(label);
         id.setFont(FontManager.secondary);
 
-        value = new ValueField();
+        value = new IntField(maxCharacters);
         value.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, ColorManager.primary));
-        value.addActionListener(e -> setValue((Integer) value.getValue()));
-
-        // TODO: Fix ValueField allowing invalid characters
-        //  when clicking in and out of different ValueFields
-        //  despite formatter.setAllowsInvalid(false)
 
         addChangeListener(e -> value.setText(String.valueOf(getValue())));
     }
