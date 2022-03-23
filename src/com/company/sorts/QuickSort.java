@@ -1,5 +1,6 @@
 package com.company.sorts;
 
+import com.company.panels.ControlPanel;
 import com.company.panels.VisualizerPanel;
 
 import javax.swing.*;
@@ -11,12 +12,13 @@ public class QuickSort extends Sort {
 
     private QuickSort() {}
 
-    public void start(VisualizerPanel vis, int sortSpeed) {
+    public void start(VisualizerPanel vis, ControlPanel con, int sortSpeed) {
         worker = new SwingWorker<>() {
             @Override
             protected Void doInBackground() {
                 System.out.printf("Worker started: %s%n", worker);
                 vis.setSorting(true);
+                con.sortButton.setText("Stop");
                 sort(vis, vis.getArr(), 0, -128, sortSpeed);
                 return null;
             }
@@ -24,6 +26,7 @@ public class QuickSort extends Sort {
             protected void done() {
                 super.done();
                 vis.setSorting(false);
+                con.sortButton.setText("Sort");
                 vis.getQueue().poll();
                 System.out.printf("Worker finished: %s%n", worker);
             }

@@ -12,7 +12,7 @@ import java.awt.*;
 
 public class ControlPanel extends JPanel {
 
-    SortButton sortButton;
+    public SortButton sortButton;
     ShuffleButton shuffleButton;
     SortComboBox sortComboBox;
     RangeSlider rangeSlider;

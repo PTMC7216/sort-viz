@@ -36,7 +36,7 @@ public class PrimaryPanel extends JPanel {
                 queue.element().stop();
             } else {
                 queue.offer(sort);
-                queue.element().start(vis, speed);
+                queue.element().start(vis, con, speed);
             }
         });
 
