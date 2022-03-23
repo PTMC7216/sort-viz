@@ -6,27 +6,38 @@ import com.company.utils.FontManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 public abstract class Slider extends JSlider {
 
-    protected final JLabel id;
-    protected final IntField value;
+    protected final JLabel label;
+    protected final IntField field;
 
-    public Slider(String label, int maxCharacters) {
+    public Slider(String name, int maxCharacters) {
         setPreferredSize(new Dimension(113, 16));
         setBackground(ColorManager.secondary);
         setOrientation(0);
-        setMinimum(1);
-        setMaximum(1);
-        setValue(1);
 
-        id = new JLabel(label);
-        id.setFont(FontManager.secondary);
+        label = new JLabel(name);
+        label.setFont(FontManager.secondary);
 
-        value = new IntField(maxCharacters);
-        value.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, ColorManager.primary));
+        field = new IntField(maxCharacters);
+        field.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, ColorManager.primary));
+        field.addActionListener(e -> processText());
+        field.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                field.selectAll();
+            }
 
-        addChangeListener(e -> value.setText(String.valueOf(getValue())));
+            @Override
+            public void focusLost(FocusEvent e) {
+                processText();
+            }
+        });
+
+        addChangeListener(e -> field.setText(String.valueOf(getValue())));
     }
 
     public JPanel container() {
@@ -40,7 +51,7 @@ public abstract class Slider extends JSlider {
         gbc.gridy = 0;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
-        panel.add(id, gbc);
+        panel.add(label, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -54,9 +65,26 @@ public abstract class Slider extends JSlider {
         gbc.gridheight = 2;
         gbc.ipady = 1;
         gbc.fill = 1;
-        panel.add(value, gbc);
+        panel.add(field, gbc);
 
         return panel;
+    }
+
+    private void processText() {
+        if (field.getText().isEmpty()) {
+            field.setText("0");
+        }
+        else if (field.getText().startsWith("0")) {
+            field.setText(field.getText().replaceAll("^0+(?!$)", ""));
+        }
+
+        if (Integer.parseInt(field.getText()) < getMinimum()) {
+            field.setText(String.valueOf(getMinimum()));
+        }
+        else if (Integer.parseInt(field.getText()) > getMaximum()) {
+            field.setText(String.valueOf(getMaximum()));
+        }
+        setValue(Integer.parseInt(field.getText()));
     }
 
 }
