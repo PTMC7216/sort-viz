@@ -16,7 +16,6 @@ public class QuickSort extends Sort {
         worker = new SwingWorker<>() {
             @Override
             protected Void doInBackground() {
-                System.out.printf("Worker started: %s%n", worker);
                 vis.setSorting(true);
                 con.sortButton.setText("Stop");
                 sort(vis, vis.getArr(), 0, -128, sortSpeed);
@@ -25,10 +24,10 @@ public class QuickSort extends Sort {
             @Override
             protected void done() {
                 super.done();
+                vis.resetHighlight();
                 vis.setSorting(false);
                 con.sortButton.setText("Sort");
                 vis.getQueue().poll();
-                System.out.printf("Worker finished: %s%n", worker);
             }
         };
         worker.execute();

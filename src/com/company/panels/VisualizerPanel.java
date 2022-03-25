@@ -54,7 +54,6 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
         drawArr(g2D);
     }
 
-    // TODO: Change rect color during swap.
     private void drawArr(Graphics2D g2D) {
         g2D.setPaint(ColorManager.tertiary);
 
@@ -62,16 +61,35 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
         float rectHeightMax = (float) resY / arr.length;
 
         for (int i = 0; i < arr.length; i++) {
+
+            if (highlight[i] == 1) {
+                g2D.setPaint(Color.RED);
+            } else {
+                g2D.setPaint(ColorManager.tertiary);
+            }
+
             g2D.fillRect(
                     (int)(i * rectWidthMax),
                     resY,
                     (int)(1 + rectWidthMax),
                     (int)(-arr[i] * rectHeightMax));
+
+            highlight[i] = 0;
         }
     }
 
     public void swap(int[] arr, int i, int j) {
         arr[i] = (arr[i] + arr[j]) - (arr[j] = arr[i]);
+        highlight[i] = 1;
+        highlight[j] = 1;
+        repaint();
+    }
+
+    // TODO: Fix highlight not resetting properly.
+    public void resetHighlight() {
+        for (int i = 0; i < arr.length; i++) {
+            highlight[i] = 0;
+        }
         repaint();
     }
 
