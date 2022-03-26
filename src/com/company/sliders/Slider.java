@@ -15,15 +15,16 @@ public abstract class Slider extends JSlider {
     protected final IntField field;
 
     public Slider(String name, int maxCharacters) {
+        // TODO: Improve look and feel.
         setPreferredSize(new Dimension(113, 16));
-        setBackground(ColorManager.secondary);
+        setBackground(ColorManager.SECONDARY);
         setOrientation(0);
 
         label = new JLabel(name);
-        label.setFont(FontManager.secondary);
+        label.setFont(FontManager.SECONDARY);
 
         field = new IntField(maxCharacters);
-        field.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, ColorManager.primary));
+        field.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, ColorManager.PRIMARY));
         field.addActionListener(e -> processText());
         field.addFocusListener(new FocusListener() {
             @Override
@@ -42,8 +43,8 @@ public abstract class Slider extends JSlider {
 
     public JPanel container() {
         JPanel panel = new JPanel();
-        panel.setBackground(ColorManager.secondary);
-        panel.setBorder(BorderFactory.createLineBorder(ColorManager.primary, 1));
+        panel.setBackground(ColorManager.SECONDARY);
+        panel.setBorder(BorderFactory.createLineBorder(ColorManager.PRIMARY, 1));
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 

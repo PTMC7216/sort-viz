@@ -16,13 +16,13 @@ public class SortComboBoxUI extends BasicComboBoxUI {
         super.installDefaults();
 
         LookAndFeel.uninstallBorder(comboBox);
-        comboBox.setBorder(BorderFactory.createLineBorder(ColorManager.primary, 1));
+        comboBox.setBorder(BorderFactory.createLineBorder(ColorManager.PRIMARY, 1));
 
-        Color sharedBackground = ColorManager.secondary;
+        Color sharedBackground = ColorManager.SECONDARY;
         UIManager.put("ComboBox.selectionBackground", new ColorUIResource(sharedBackground));
         UIManager.put("ComboBox.background", new ColorUIResource(sharedBackground));
 
-        comboBox.setFont(FontManager.secondary);
+        comboBox.setFont(FontManager.SECONDARY);
 
         comboBox.setPreferredSize(new Dimension(147, 18));
 
@@ -32,10 +32,10 @@ public class SortComboBoxUI extends BasicComboBoxUI {
 
     @Override
     protected JButton createArrowButton() {
-        UIManager.put("ComboBox.buttonBackground", new ColorUIResource(ColorManager.secondary));
-        UIManager.put("ComboBox.buttonShadow", new ColorUIResource(ColorManager.primary));
+        UIManager.put("ComboBox.buttonBackground", new ColorUIResource(ColorManager.SECONDARY));
+        UIManager.put("ComboBox.buttonShadow", new ColorUIResource(ColorManager.PRIMARY));
         UIManager.put("ComboBox.buttonDarkShadow", new ColorUIResource(Color.BLACK));
-        UIManager.put("ComboBox.buttonHighlight", new ColorUIResource(ColorManager.tertiary));
+        UIManager.put("ComboBox.buttonHighlight", new ColorUIResource(ColorManager.TERTIARY));
 
         JButton button = new BasicArrowButton(BasicArrowButton.SOUTH,
                 UIManager.getColor("ComboBox.buttonBackground"),
@@ -60,10 +60,10 @@ public class SortComboBoxUI extends BasicComboBoxUI {
             setHorizontalAlignment(CENTER);
 
             if (isSelected) {
-                setBackground(ColorManager.primary);
+                setBackground(ColorManager.PRIMARY);
             }
             else {
-                setBackground(ColorManager.secondary);
+                setBackground(ColorManager.SECONDARY);
             }
 
             return this;

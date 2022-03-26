@@ -11,10 +11,10 @@ public abstract class Button extends JButton {
     public Button() {
         setPreferredSize(new Dimension(70, 20));
 
-        setBackground(ColorManager.secondary);
+        setBackground(ColorManager.SECONDARY);
         setBorder(BorderFactory.createBevelBorder(0));
 
-        setFont(FontManager.primary);
+        setFont(FontManager.PRIMARY);
         setText("Button");
         setFocusable(false);
     }

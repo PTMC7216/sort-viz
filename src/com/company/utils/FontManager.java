@@ -2,10 +2,12 @@ package com.company.utils;
 
 import java.awt.*;
 
-public class FontManager {
+public final class FontManager {
 
-    final public static Font primary = new Font(Font.MONOSPACED, Font.BOLD, 14);
-    final public static Font secondary = new Font(Font.MONOSPACED, Font.BOLD, 12);
-    final public static Font tertiary = new Font(Font.MONOSPACED, Font.BOLD, 10);
+    public static final Font PRIMARY = new Font(Font.MONOSPACED, Font.BOLD, 14);
+    public static final Font SECONDARY = new Font(Font.MONOSPACED, Font.BOLD, 12);
+    public static final Font TERTIARY = new Font(Font.MONOSPACED, Font.BOLD, 10);
+
+    private FontManager() {}
 
 }

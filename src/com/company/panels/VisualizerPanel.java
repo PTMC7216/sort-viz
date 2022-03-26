@@ -2,6 +2,7 @@ package com.company.panels;
 
 import com.company.sorts.Sort;
 import com.company.utils.ColorManager;
+import com.company.utils.Sound;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,8 +22,11 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
     private final Queue<Sort> queue = new LinkedList<>();
     private boolean sorting = false;
 
+    private final Sound sound;
+
     public VisualizerPanel() {
         setBackground(Color.BLACK);
+        sound = new Sound(this);
         addComponentListener(this);
     }
 
@@ -55,7 +59,7 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
     }
 
     private void drawArr(Graphics2D g2D) {
-        g2D.setPaint(ColorManager.tertiary);
+        g2D.setPaint(ColorManager.TERTIARY);
 
         float rectWidthMax = (float) resX / arr.length;
         float rectHeightMax = (float) resY / arr.length;
@@ -65,7 +69,7 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
             if (highlight[i] == 1) {
                 g2D.setPaint(Color.RED);
             } else {
-                g2D.setPaint(ColorManager.tertiary);
+                g2D.setPaint(ColorManager.TERTIARY);
             }
 
             g2D.fillRect(
@@ -82,15 +86,18 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
         arr[i] = (arr[i] + arr[j]) - (arr[j] = arr[i]);
         highlight[i] = 1;
         highlight[j] = 1;
+        sound.startNote(arr[i]);
         repaint();
+        sound.stopNote(arr[i]);
     }
 
-    // TODO: Fix highlight not resetting properly.
+    // TODO: Fix highlight sometimes not resetting properly.
     public void resetHighlight() {
         for (int i = 0; i < arr.length; i++) {
             highlight[i] = 0;
         }
         repaint();
+        sound.stopAllNotes();
     }
 
     public void sleep() {

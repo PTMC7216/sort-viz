@@ -12,9 +12,9 @@ public class IntField extends JTextField {
 
     public IntField(int maxCharacters) {
         setPreferredSize(new Dimension(32, 12));
-        setBorder(BorderFactory.createLineBorder(ColorManager.primary, 1));
-        setBackground(ColorManager.secondary);
-        setFont(FontManager.secondary);
+        setBorder(BorderFactory.createLineBorder(ColorManager.PRIMARY, 1));
+        setBackground(ColorManager.SECONDARY);
+        setFont(FontManager.SECONDARY);
         setHorizontalAlignment(CENTER);
 
         AbstractDocument doc = (AbstractDocument)getDocument();

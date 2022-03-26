@@ -20,7 +20,7 @@ public class ControlPanel extends JPanel {
 
     public ControlPanel() {
         setPreferredSize(new Dimension(160, 0));
-        setBackground(ColorManager.secondary);
+        setBackground(ColorManager.SECONDARY);
 
         sortButton = new SortButton();
         shuffleButton = new ShuffleButton();
