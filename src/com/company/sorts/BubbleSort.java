@@ -1,45 +1,21 @@
 package com.company.sorts;
 
-import com.company.panels.ControlPanel;
 import com.company.panels.VisualizerPanel;
 
-import javax.swing.*;
-
-public class BubbleSort extends Sort {
+public class BubbleSort extends IterativeWorker {
 
     private static BubbleSort instance = null;
-    private SwingWorker<Void, Void> worker;
 
     private BubbleSort() {}
 
-    public void start(VisualizerPanel vis, ControlPanel con, int speed) {
-        worker = new SwingWorker<>() {
-            @Override
-            protected Void doInBackground() {
-                vis.setSorting(true);
-                con.sortButton.setText("Stop");
-                sort(vis, speed);
-                return null;
-            }
-            @Override
-            protected void done() {
-                super.done();
-                vis.resetHighlight();
-                vis.setSorting(false);
-                con.sortButton.setText("Sort");
-                vis.getQueue().poll();
-            }
-        };
-        worker.execute();
-    }
-
-    public void stop() {
-        if (worker != null) {
-            worker.cancel(false);
+    public static BubbleSort getInstance() {
+        if (instance == null) {
+            instance = new BubbleSort();
         }
+        return instance;
     }
 
-    private void sort(VisualizerPanel vis, int speed) {
+    protected void sort(VisualizerPanel vis, int speed) {
         int[] arr = vis.getArr();
         int index_len = arr.length - 1;
         int step = 0;
@@ -60,13 +36,6 @@ public class BubbleSort extends Sort {
             }
             index_len--;
         }
-    }
-
-    public static BubbleSort getInstance() {
-        if (instance == null) {
-            instance = new BubbleSort();
-        }
-        return instance;
     }
 
 }

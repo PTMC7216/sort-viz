@@ -12,10 +12,10 @@ public class PrimaryPanel extends JPanel {
     private final ControlPanel con;
     private final VisualizerPanel vis;
     private final DurstenfeldShuffle shuffle;
+    private final Queue<Sort> queue;
 
     private Sort sort;
     private int speed;
-    private final Queue<Sort> queue;
 
     public PrimaryPanel() {
         setBackground(Color.GRAY);
