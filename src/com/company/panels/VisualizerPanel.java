@@ -21,6 +21,7 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
     private int[] highlight = new int[512];
     private final Queue<Sort> queue = new LinkedList<>();
     private boolean sorting = false;
+    private boolean shuffling = false;
 
     private final Sound sound;
 
@@ -49,6 +50,14 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
 
     public void setSorting(boolean bool) {
         this.sorting = bool;
+    }
+
+    public boolean isShuffling() {
+        return this.shuffling;
+    }
+
+    public void setShuffling(boolean bool) {
+        this.shuffling = bool;
     }
 
     public void paintComponent(Graphics g) {

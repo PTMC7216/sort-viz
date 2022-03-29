@@ -12,13 +12,13 @@ public class BubbleSort extends Sort {
 
     private BubbleSort() {}
 
-    public void start(VisualizerPanel vis, ControlPanel con, int sortSpeed) {
+    public void start(VisualizerPanel vis, ControlPanel con, int speed) {
         worker = new SwingWorker<>() {
             @Override
             protected Void doInBackground() {
                 vis.setSorting(true);
                 con.sortButton.setText("Stop");
-                sort(vis, sortSpeed);
+                sort(vis, speed);
                 return null;
             }
             @Override
@@ -39,7 +39,7 @@ public class BubbleSort extends Sort {
         }
     }
 
-    private void sort(VisualizerPanel vis, int sortSpeed) {
+    private void sort(VisualizerPanel vis, int speed) {
         int[] arr = vis.getArr();
         int index_len = arr.length - 1;
         int step = 0;
@@ -49,7 +49,7 @@ public class BubbleSort extends Sort {
             for (int i = 0; i < index_len; i++) {
                 if (worker.isCancelled()) return;
                 step++;
-                if (step == sortSpeed) {
+                if (step >= speed) {
                     step = 0;
                     vis.sleep();
                 }

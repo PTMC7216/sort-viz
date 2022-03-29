@@ -12,13 +12,13 @@ public class QuickSort extends Sort {
 
     private QuickSort() {}
 
-    public void start(VisualizerPanel vis, ControlPanel con, int sortSpeed) {
+    public void start(VisualizerPanel vis, ControlPanel con, int speed) {
         worker = new SwingWorker<>() {
             @Override
             protected Void doInBackground() {
                 vis.setSorting(true);
                 con.sortButton.setText("Stop");
-                sort(vis, vis.getArr(), 0, -128, sortSpeed);
+                sort(vis, vis.getArr(), 0, -128, speed);
                 return null;
             }
             @Override
@@ -39,25 +39,25 @@ public class QuickSort extends Sort {
         }
     }
 
-    private void sort(VisualizerPanel vis, int[] arr, int left, int right, int sortSpeed) {
+    private void sort(VisualizerPanel vis, int[] arr, int left, int right, int speed) {
         if (worker.isCancelled()) return;
         if (right == -128) {
             right = arr.length - 1;
         }
         if (left < right) {
-            int part = partition(vis, arr, left, right, sortSpeed);
-            sort(vis, arr, left, part - 1, sortSpeed);
-            sort(vis, arr, part + 1, right, sortSpeed);
+            int part = partition(vis, arr, left, right, speed);
+            sort(vis, arr, left, part - 1, speed);
+            sort(vis, arr, part + 1, right, speed);
         }
     }
 
-    private int partition(VisualizerPanel vis, int[] arr, int left, int right, int sortSpeed) {
+    private int partition(VisualizerPanel vis, int[] arr, int left, int right, int speed) {
         int step = 0;
         int i = left - 1;
         for (int j = left; j < right; j++) {
             if (worker.isCancelled()) return 0;
             step++;
-            if (step == sortSpeed) {
+            if (step >= speed) {
                 step = 0;
                 vis.sleep();
             }
