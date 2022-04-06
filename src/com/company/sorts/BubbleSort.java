@@ -30,7 +30,7 @@ public class BubbleSort extends IterativeWorker {
                     vis.sleep();
                 }
                 if (arr[i] > arr[i + 1]) {
-                    vis.swap(arr, i, i + 1);
+                    vis.swap(i, i + 1);
                     loop = true;
                 }
             }

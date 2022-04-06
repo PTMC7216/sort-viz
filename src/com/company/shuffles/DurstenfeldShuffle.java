@@ -50,7 +50,7 @@ public class DurstenfeldShuffle {
                 vis.sleep();
             }
             int rand = (int) (Math.random() * right);
-            vis.swap(arr, rand, right);
+            vis.swap(rand, right);
             right--;
         }
     }

@@ -29,6 +29,11 @@ public class PrimaryPanel extends JPanel {
         add(con, BorderLayout.WEST);
         add(vis, BorderLayout.CENTER);
 
+        buttonListeners();
+
+    }
+
+    private void buttonListeners() {
         con.sortButton.addActionListener(e -> {
             sort = con.sortComboBox.getSort();
             speed = con.speedSlider.getValue();
@@ -57,7 +62,6 @@ public class PrimaryPanel extends JPanel {
                 shuffle.start(vis, con, speed);
             }
         });
-
     }
 
 }

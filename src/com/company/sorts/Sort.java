@@ -6,9 +6,7 @@ import com.company.panels.VisualizerPanel;
 import javax.swing.*;
 
 public abstract class Sort {
-
     protected SwingWorker<Void, Void> worker;
-
     public abstract void start(VisualizerPanel vis, ControlPanel con, int sortSpeed);
     public void stop() {
         if (worker != null) {
@@ -18,7 +16,6 @@ public abstract class Sort {
 }
 
 abstract class IterativeWorker extends Sort {
-
     public void start(VisualizerPanel vis, ControlPanel con, int speed) {
         worker = new SwingWorker<>() {
             @Override
@@ -39,12 +36,10 @@ abstract class IterativeWorker extends Sort {
         };
         worker.execute();
     }
-
     protected abstract void sort(VisualizerPanel vis, int speed);
 }
 
 abstract class RecursiveWorker extends Sort {
-
     public void start(VisualizerPanel vis, ControlPanel con, int speed) {
         worker = new SwingWorker<>() {
             @Override
@@ -65,6 +60,5 @@ abstract class RecursiveWorker extends Sort {
         };
         worker.execute();
     }
-
-    protected abstract void sort(VisualizerPanel vis, int[] arr, int i, int i1, int speed);
+    protected abstract void sort(VisualizerPanel vis, int[] arr, int left, int right, int speed);
 }

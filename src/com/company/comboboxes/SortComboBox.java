@@ -11,7 +11,7 @@ public class SortComboBox extends JComboBox<String> {
     public SortComboBox() {
         setUI(new SortComboBoxUI());
 
-        String[] items = {"Bubble sort", "Comb sort", "Odd-even sort", "Quicksort"};
+        String[] items = {"Bubble sort", "Comb sort", "Odd-even sort", "Merge sort", "Quicksort"};
         for (String item : items) {
             addItem(item);
         }
@@ -28,6 +28,8 @@ public class SortComboBox extends JComboBox<String> {
                 return CombSort.getInstance();
             case "Odd-even sort":
                 return OddEvenSort.getInstance();
+            case "Merge sort":
+                return MergeSort.getInstance();
             case "Quicksort":
                 return QuickSort.getInstance();
         }

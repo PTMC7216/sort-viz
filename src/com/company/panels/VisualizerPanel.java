@@ -91,10 +91,18 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
         }
     }
 
-    public void swap(int[] arr, int i, int j) {
+    public void swap(int i, int j) {
         arr[i] = (arr[i] + arr[j]) - (arr[j] = arr[i]);
         highlight[i] = 1;
         highlight[j] = 1;
+        sound.startNote(arr[i]);
+        repaint();
+        sound.stopNote(arr[i]);
+    }
+
+    public void update(int i, int val) {
+        arr[i] = val;
+        highlight[i] = 1;
         sound.startNote(arr[i]);
         repaint();
         sound.stopNote(arr[i]);

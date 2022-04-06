@@ -40,13 +40,13 @@ public class QuickSort extends RecursiveWorker {
             if (arr[j] <= arr[right]) {
                 i++;
                 if (i != j) {
-                    vis.swap(arr, i, j);
+                    vis.swap(i, j);
                 }
             }
         }
         if (arr[i + 1] != arr[right]) {
             vis.sleep();
-            vis.swap(arr, i + 1, right);
+            vis.swap(i + 1, right);
         }
         return i + 1;
     }

@@ -22,7 +22,6 @@ public class CombSort extends IterativeWorker {
         int step = 0;
         boolean loop = true;
         while (loop) {
-            if (worker.isCancelled()) return;
             gap = (int) (gap / shrink);
             if (gap <= 1) {
                 gap = 1;
@@ -36,7 +35,7 @@ public class CombSort extends IterativeWorker {
                     vis.sleep();
                 }
                 if (arr[i] > arr[i + gap]) {
-                    vis.swap(arr, i, (i + gap));
+                    vis.swap(i, (i + gap));
                     loop = true;
                 }
             }
