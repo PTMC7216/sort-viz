@@ -30,17 +30,17 @@ public class PrimaryPanel extends JPanel {
         add(vis, BorderLayout.CENTER);
 
         buttonListeners();
-
+        sliderListeners();
     }
 
     private void buttonListeners() {
         con.sortButton.addActionListener(e -> {
             sort = con.sortComboBox.getSort();
             speed = con.speedSlider.getValue();
-            if (vis.isSorting()) {
+            if (vis.getSorting()) {
                 queue.element().stop();
             } else {
-                if (vis.isShuffling()) {
+                if (vis.getShuffling()) {
                     shuffle.stop();
                 }
                 queue.offer(sort);
@@ -50,10 +50,10 @@ public class PrimaryPanel extends JPanel {
 
         con.shuffleButton.addActionListener(e -> {
             speed = con.speedSlider.getValue();
-            if (vis.isShuffling()) {
+            if (vis.getShuffling()) {
                 shuffle.stop();
             } else {
-                if (vis.isSorting()) {
+                if (vis.getSorting()) {
                     queue.element().stop();
                 }
                 if (vis.getArr().length != con.rangeSlider.getValue()) {
@@ -62,6 +62,10 @@ public class PrimaryPanel extends JPanel {
                 shuffle.start(vis, con, speed);
             }
         });
+    }
+
+    private void sliderListeners() {
+        con.volumeSlider.addChangeListener(e -> vis.setVolume(con.volumeSlider.getValue()));
     }
 
 }

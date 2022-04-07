@@ -43,6 +43,9 @@ public abstract class Slider extends JSlider {
 
     public JPanel container() {
         JPanel panel = new JPanel();
+
+        panel.addMouseWheelListener(e -> setValue(getValue() - e.getWheelRotation()));
+
         panel.setBackground(ColorManager.SECONDARY);
         panel.setBorder(BorderFactory.createLineBorder(ColorManager.PRIMARY, 1));
         panel.setLayout(new GridBagLayout());
@@ -85,6 +88,7 @@ public abstract class Slider extends JSlider {
         else if (Integer.parseInt(field.getText()) > getMaximum()) {
             field.setText(String.valueOf(getMaximum()));
         }
+
         setValue(Integer.parseInt(field.getText()));
     }
 

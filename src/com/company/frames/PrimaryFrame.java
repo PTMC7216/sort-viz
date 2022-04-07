@@ -12,7 +12,7 @@ public class PrimaryFrame extends JFrame {
         setIconImage(new ImageIcon("./src/com/company/icon.png").getImage());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         getContentPane().setPreferredSize(new Dimension(800, 600));
-        setMinimumSize(new Dimension(340, 174));
+        setMinimumSize(new Dimension(354, 214));
 
         add(new PrimaryPanel());
 

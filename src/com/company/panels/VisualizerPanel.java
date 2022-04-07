@@ -17,8 +17,8 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
     private int resX;
     private int resY;
 
-    private int[] arr = IntStream.rangeClosed(1, 512).toArray();
-    private int[] highlight = new int[512];
+    private int[] arr = IntStream.rangeClosed(1, 1024).toArray();
+    private int[] highlight = new int[1024];
     private final Queue<Sort> queue = new LinkedList<>();
     private boolean sorting = false;
     private boolean shuffling = false;
@@ -44,7 +44,11 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
         this.highlight = new int[arrSize];
     }
 
-    public boolean isSorting() {
+    public void setVolume(int volume) {
+        sound.setVolume(volume);
+    }
+
+    public boolean getSorting() {
         return this.sorting;
     }
 
@@ -52,7 +56,7 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
         this.sorting = bool;
     }
 
-    public boolean isShuffling() {
+    public boolean getShuffling() {
         return this.shuffling;
     }
 
@@ -60,9 +64,12 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
         this.shuffling = bool;
     }
 
-    public void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g;
+
+        // TODO: Antialiasing implementation
+//        g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         drawArr(g2D);
     }

@@ -5,6 +5,7 @@ import com.company.buttons.SortButton;
 import com.company.comboboxes.SortComboBox;
 import com.company.sliders.RangeSlider;
 import com.company.sliders.SpeedSlider;
+import com.company.sliders.VolumeSlider;
 import com.company.utils.ColorManager;
 
 import javax.swing.*;
@@ -17,6 +18,7 @@ public class ControlPanel extends JPanel {
     SortComboBox sortComboBox;
     RangeSlider rangeSlider;
     SpeedSlider speedSlider;
+    VolumeSlider volumeSlider;
 
     public ControlPanel() {
         setPreferredSize(new Dimension(160, 0));
@@ -27,12 +29,14 @@ public class ControlPanel extends JPanel {
         sortComboBox = new SortComboBox();
         rangeSlider = new RangeSlider();
         speedSlider = new SpeedSlider();
+        volumeSlider = new VolumeSlider();
 
         add(sortButton);
         add(shuffleButton);
         add(sortComboBox);
         add(rangeSlider.container());
         add(speedSlider.container());
+        add(volumeSlider.container());
 
     }
 

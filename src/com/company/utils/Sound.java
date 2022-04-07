@@ -12,9 +12,11 @@ public class Sound {
     private final VisualizerPanel vis;
 
     private static final int INSTRUMENT = 16;
+    private static final int VELOCITY = 50;
     private static final int NOTE_RANGE_START = 40;
     private static final int NOTE_RANGE_END = 105;
-    private static final int VELOCITY = 50;
+
+    private int volume = 10;
 
     public Sound(VisualizerPanel vis) {
         this.vis = vis;
@@ -26,6 +28,22 @@ public class Sound {
         }
         channel = synth.getChannels()[0];
         channel.programChange(synth.getAvailableInstruments()[INSTRUMENT].getPatch().getProgram());
+        channel.controlChange(7, 127);
+    }
+
+    private int translateVolume(int volume) {
+        int volumeRange = 10;
+        int controllerMax = 127;
+        return (volume * controllerMax) / volumeRange;
+    }
+
+    public int getVolume() {
+        return this.volume;
+    }
+
+    public void setVolume(int volume) {
+        this.volume = translateVolume(volume);
+        channel.controlChange(7, this.volume);
     }
 
     private int translateVal(int arrVal) {
