@@ -98,6 +98,16 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
         }
     }
 
+    // TODO: Implement
+    public boolean isSorted() {
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] > arr[i + 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void swap(int i, int j) {
         arr[i] = (arr[i] + arr[j]) - (arr[j] = arr[i]);
         highlight[i] = 1;
@@ -139,17 +149,11 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
     }
 
     @Override
-    public void componentMoved(ComponentEvent e) {
-
-    }
+    public void componentMoved(ComponentEvent e) {}
 
     @Override
-    public void componentShown(ComponentEvent e) {
-
-    }
+    public void componentShown(ComponentEvent e) {}
 
     @Override
-    public void componentHidden(ComponentEvent e) {
-
-    }
+    public void componentHidden(ComponentEvent e) {}
 }

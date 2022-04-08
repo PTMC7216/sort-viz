@@ -15,10 +15,7 @@ public abstract class Slider extends JSlider {
     protected final IntField field;
 
     public Slider(String name, int maxCharacters) {
-        // TODO: Improve look and feel.
-        setPreferredSize(new Dimension(113, 16));
-        setBackground(ColorManager.SECONDARY);
-        setOrientation(0);
+        setUI(new SliderUI(this));
 
         label = new JLabel(name);
         label.setFont(FontManager.SECONDARY);

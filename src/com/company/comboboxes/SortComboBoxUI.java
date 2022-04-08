@@ -11,6 +11,11 @@ import java.awt.*;
 
 public class SortComboBoxUI extends BasicComboBoxUI {
 
+    public SortComboBoxUI(JComboBox<String> b) {
+        b.setFont(FontManager.SECONDARY);
+        b.setPreferredSize(new Dimension(147, 18));
+    }
+
     @Override
     protected void installDefaults() {
         super.installDefaults();
@@ -21,10 +26,6 @@ public class SortComboBoxUI extends BasicComboBoxUI {
         Color sharedBackground = ColorManager.SECONDARY;
         UIManager.put("ComboBox.selectionBackground", new ColorUIResource(sharedBackground));
         UIManager.put("ComboBox.background", new ColorUIResource(sharedBackground));
-
-        comboBox.setFont(FontManager.SECONDARY);
-
-        comboBox.setPreferredSize(new Dimension(147, 18));
 
         comboBox.setRenderer(new Renderer());
 

@@ -9,7 +9,7 @@ public class SortComboBox extends JComboBox<String> {
     private String selected;
 
     public SortComboBox() {
-        setUI(new SortComboBoxUI());
+        setUI(new SortComboBoxUI(this));
 
         String[] items = {"Bubble sort", "Comb sort", "Odd-even sort", "Merge sort", "Quicksort"};
         for (String item : items) {
