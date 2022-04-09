@@ -1,6 +1,7 @@
 package com.company.sorts;
 
 import com.company.panels.VisualizerPanel;
+import com.company.utils.Publisher;
 
 public class OddEvenSort extends IterativeWorker {
 
@@ -19,6 +20,7 @@ public class OddEvenSort extends IterativeWorker {
         int[] arr = vis.getArr();
         int index_len = arr.length - 1;
         int step = 0;
+        int updates = 0;
         boolean loop = true;
         while (loop) {
             loop = false;
@@ -31,6 +33,8 @@ public class OddEvenSort extends IterativeWorker {
                 }
                 if (arr[i] > arr[i + 1]) {
                     vis.swap(i, (i + 1));
+                    updates++;
+                    worker.toPublish(new Publisher(0, updates));
                     loop = true;
                 }
             }
@@ -43,6 +47,8 @@ public class OddEvenSort extends IterativeWorker {
                 }
                 if (arr[i] > arr[i + 1]) {
                     vis.swap(i, (i + 1));
+                    updates++;
+                    worker.toPublish(new Publisher(0, updates));
                     loop = true;
                 }
             }

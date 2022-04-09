@@ -27,8 +27,8 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
 
     public VisualizerPanel() {
         setBackground(Color.BLACK);
-        sound = new Sound(this);
         addComponentListener(this);
+        sound = new Sound(this);
     }
 
     public Queue<Sort> getQueue() {
@@ -98,7 +98,6 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
         }
     }
 
-    // TODO: Implement
     public boolean isSorted() {
         for (int i = 0; i < arr.length - 1; i++) {
             if (arr[i] > arr[i + 1]) {
@@ -119,6 +118,13 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
 
     public void update(int i, int val) {
         arr[i] = val;
+        highlight[i] = 1;
+        sound.startNote(arr[i]);
+        repaint();
+        sound.stopNote(arr[i]);
+    }
+
+    public void subUpdate(int i) {
         highlight[i] = 1;
         sound.startNote(arr[i]);
         repaint();

@@ -2,11 +2,13 @@ package com.company.sorts;
 
 import com.company.panels.ControlPanel;
 import com.company.panels.VisualizerPanel;
+import com.company.utils.PublishWorker;
+import com.company.utils.Publisher;
 
-import javax.swing.*;
+import java.util.List;
 
 public abstract class Sort {
-    protected SwingWorker<Void, Void> worker;
+    protected PublishWorker<Void, Publisher> worker;
     public abstract void start(VisualizerPanel vis, ControlPanel con, int sortSpeed);
     public void stop() {
         if (worker != null) {
@@ -17,20 +19,30 @@ public abstract class Sort {
 
 abstract class IterativeWorker extends Sort {
     public void start(VisualizerPanel vis, ControlPanel con, int speed) {
-        worker = new SwingWorker<>() {
+        worker = new PublishWorker<>() {
             @Override
             protected Void doInBackground() {
                 vis.setSorting(true);
                 con.sortButton.setText("Stop");
+                con.setStatus("SORTING");
+                con.resetLabelUpdates();
                 sort(vis, speed);
                 return null;
             }
             @Override
+            protected void process(List<Publisher> chunks) {
+                for (Publisher p : chunks){
+                    if (p.getCategory() == 0) {
+                        con.updateArrLabel(p.getData());
+                    }
+                }
+            }
+            @Override
             protected void done() {
-                super.done();
                 vis.resetHighlight();
                 vis.setSorting(false);
                 con.sortButton.setText("Sort");
+                con.setStatus("IDLE");
                 vis.getQueue().poll();
             }
         };
@@ -41,20 +53,33 @@ abstract class IterativeWorker extends Sort {
 
 abstract class RecursiveWorker extends Sort {
     public void start(VisualizerPanel vis, ControlPanel con, int speed) {
-        worker = new SwingWorker<>() {
+        worker = new PublishWorker<>() {
             @Override
             protected Void doInBackground() {
                 vis.setSorting(true);
                 con.sortButton.setText("Stop");
+                con.setStatus("SORTING");
+                con.resetLabelUpdates();
                 sort(vis, vis.getArr(), 0, -128, speed);
                 return null;
             }
             @Override
+            protected void process(List<Publisher> chunks) {
+                for (Publisher p : chunks){
+                    if (p.getCategory() == 0) {
+                        con.updateArrLabel(p.getData());
+                    } else {
+                        con.updateSubArrLabel(p.getData());
+                    }
+                }
+
+            }
+            @Override
             protected void done() {
-                super.done();
                 vis.resetHighlight();
                 vis.setSorting(false);
                 con.sortButton.setText("Sort");
+                con.setStatus("IDLE");
                 vis.getQueue().poll();
             }
         };

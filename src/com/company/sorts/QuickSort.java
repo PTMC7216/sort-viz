@@ -1,10 +1,12 @@
 package com.company.sorts;
 
 import com.company.panels.VisualizerPanel;
+import com.company.utils.Publisher;
 
 public class QuickSort extends RecursiveWorker {
 
     private static QuickSort instance = null;
+    private int updates;
 
     private QuickSort() {}
 
@@ -16,14 +18,20 @@ public class QuickSort extends RecursiveWorker {
     }
 
     protected void sort(VisualizerPanel vis, int[] arr, int left, int right, int speed) {
+        updates = 0;
+        recurse(vis, arr, left, right, speed);
+    }
+
+    // TODO: Improve visualization and pivot selection in partially sorted arrays
+    private void recurse(VisualizerPanel vis, int[] arr, int left, int right, int speed) {
         if (worker.isCancelled()) return;
         if (right == -128) {
             right = arr.length - 1;
         }
         if (left < right) {
             int part = partition(vis, arr, left, right, speed);
-            sort(vis, arr, left, part - 1, speed);
-            sort(vis, arr, part + 1, right, speed);
+            recurse(vis, arr, left, part - 1, speed);
+            recurse(vis, arr, part + 1, right, speed);
         }
     }
 
@@ -41,12 +49,16 @@ public class QuickSort extends RecursiveWorker {
                 i++;
                 if (i != j) {
                     vis.swap(i, j);
+                    updates++;
+                    worker.toPublish(new Publisher(0, updates));
                 }
             }
         }
         if (arr[i + 1] != arr[right]) {
             vis.sleep();
             vis.swap(i + 1, right);
+            updates++;
+            worker.toPublish(new Publisher(0, updates));
         }
         return i + 1;
     }

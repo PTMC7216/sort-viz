@@ -1,6 +1,7 @@
 package com.company.sorts;
 
 import com.company.panels.VisualizerPanel;
+import com.company.utils.Publisher;
 
 public class CombSort extends IterativeWorker {
 
@@ -20,6 +21,7 @@ public class CombSort extends IterativeWorker {
         int gap = arr.length;
         float shrink = 1.3f;
         int step = 0;
+        int updates = 0;
         boolean loop = true;
         while (loop) {
             gap = (int) (gap / shrink);
@@ -36,6 +38,7 @@ public class CombSort extends IterativeWorker {
                 }
                 if (arr[i] > arr[i + gap]) {
                     vis.swap(i, (i + gap));
+                    worker.toPublish(new Publisher(0, updates++));
                     loop = true;
                 }
             }

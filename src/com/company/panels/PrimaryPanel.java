@@ -37,14 +37,22 @@ public class PrimaryPanel extends JPanel {
         con.sortButton.addActionListener(e -> {
             sort = con.sortComboBox.getSort();
             speed = con.speedSlider.getValue();
+
             if (vis.getSorting()) {
                 queue.element().stop();
             } else {
-                if (vis.getShuffling()) {
-                    shuffle.stop();
+                 if (vis.getArr().length != con.getArrSliderVal()) {
+                    vis.setArr(con.getArrSliderVal());
+                    shuffle.start(vis, con, speed);
+                } else if (vis.isSorted()) {
+                    shuffle.start(vis, con, speed);
+                } else {
+                    if (vis.getShuffling()) {
+                        shuffle.stop();
+                    }
+                    queue.offer(sort);
+                    queue.element().start(vis, con, speed);
                 }
-                queue.offer(sort);
-                queue.element().start(vis, con, speed);
             }
         });
 
@@ -56,8 +64,8 @@ public class PrimaryPanel extends JPanel {
                 if (vis.getSorting()) {
                     queue.element().stop();
                 }
-                if (vis.getArr().length != con.rangeSlider.getValue()) {
-                    vis.setArr(con.rangeSlider.getValue());
+                if (vis.getArr().length != con.getArrSliderVal()) {
+                    vis.setArr(con.getArrSliderVal());
                 }
                 shuffle.start(vis, con, speed);
             }

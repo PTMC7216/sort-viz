@@ -1,8 +1,8 @@
 package com.company.sliders;
 
-public class RangeSlider extends Slider {
+public class ArrSlider extends Slider {
 
-    public RangeSlider() {
+    public ArrSlider() {
         super("Array size", 4);
         setMinimum(64);
         setMaximum(2048);
