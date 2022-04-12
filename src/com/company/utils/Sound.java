@@ -11,12 +11,11 @@ public class Sound {
     private final MidiChannel channel;
     private final VisualizerPanel vis;
 
-    private static final int INSTRUMENT = 16;
+    // INSTRUMENTS: 16, 32
+    private static final int INSTRUMENT = 32;
     private static final int VELOCITY = 50;
     private static final int NOTE_RANGE_START = 40;
     private static final int NOTE_RANGE_END = 105;
-
-    private int volume = 10;
 
     public Sound(VisualizerPanel vis) {
         this.vis = vis;
@@ -37,13 +36,8 @@ public class Sound {
         return (volume * controllerMax) / volumeRange;
     }
 
-    public int getVolume() {
-        return this.volume;
-    }
-
     public void setVolume(int volume) {
-        this.volume = translateVolume(volume);
-        channel.controlChange(7, this.volume);
+        channel.controlChange(7, translateVolume(volume));
     }
 
     private int translateVal(int arrVal) {
@@ -62,10 +56,6 @@ public class Sound {
 
     public void stopAllNotes() {
         channel.allNotesOff();
-    }
-
-    public void close() {
-        synth.close();
     }
 
     private void printDefaultSoundbank() {

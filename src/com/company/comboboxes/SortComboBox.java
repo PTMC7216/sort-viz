@@ -11,7 +11,19 @@ public class SortComboBox extends JComboBox<String> {
     public SortComboBox() {
         setUI(new SortComboBoxUI(this));
 
-        String[] items = {"Bubble sort", "Comb sort", "Odd-even sort", "Merge sort", "Quicksort"};
+        String[] items = {
+                "Bubble sort",
+                "Comb sort",
+                "Counting sort",
+                "Gravity sort",
+                "Merge sort",
+                "Odd-even sort",
+                "Quicksort",
+                "Radix LSD B10 sort",
+                "Radix LSD B6 sort",
+                "Radix LSD B2 sort"
+        };
+
         for (String item : items) {
             addItem(item);
         }
@@ -26,12 +38,22 @@ public class SortComboBox extends JComboBox<String> {
                 return BubbleSort.getInstance();
             case "Comb sort":
                 return CombSort.getInstance();
-            case "Odd-even sort":
-                return OddEvenSort.getInstance();
+            case "Counting sort":
+                return CountingSort.getInstance();
+            case "Gravity sort":
+                return GravitySort.getInstance();
             case "Merge sort":
                 return MergeSort.getInstance();
+            case "Odd-even sort":
+                return OddEvenSort.getInstance();
             case "Quicksort":
                 return QuickSort.getInstance();
+            case "Radix LSD B10 sort":
+                return RadixLSDB10Sort.getInstance();
+            case "Radix LSD B6 sort":
+                return RadixLSDB6Sort.getInstance();
+            case "Radix LSD B2 sort":
+                return RadixLSDB2Sort.getInstance();
         }
         return null;
     }

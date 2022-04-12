@@ -16,15 +16,15 @@ import java.awt.*;
 
 public class ControlPanel extends JPanel {
 
-    public SortButton sortButton;
-    public ShuffleButton shuffleButton;
-    SortComboBox sortComboBox;
-    ArrSlider arrSlider;
-    SpeedSlider speedSlider;
-    VolumeSlider volumeSlider;
-    StatusLabel statusLabel;
-    ArrayUpdatesLabel arrayUpdatesLabel;
-    SubArrayUpdatesLabel subArrayUpdatesLabel;
+    protected SortButton sortButton;
+    protected ShuffleButton shuffleButton;
+    protected SortComboBox sortComboBox;
+    protected ArrSlider arrSlider;
+    protected SpeedSlider speedSlider;
+    protected VolumeSlider volumeSlider;
+    protected StatusLabel statusLabel;
+    protected ArrayUpdatesLabel arrayUpdatesLabel;
+    protected SubArrayUpdatesLabel subArrayUpdatesLabel;
 
     public ControlPanel() {
         setPreferredSize(new Dimension(160, 0));
@@ -40,6 +40,7 @@ public class ControlPanel extends JPanel {
         arrayUpdatesLabel = new ArrayUpdatesLabel();
         subArrayUpdatesLabel = new SubArrayUpdatesLabel();
 
+        setLayout(new FlowLayout(FlowLayout.CENTER, 8, 8));
         add(sortButton);
         add(shuffleButton);
         add(sortComboBox);
@@ -49,6 +50,14 @@ public class ControlPanel extends JPanel {
         add(statusLabel);
         add(arrayUpdatesLabel);
         add(subArrayUpdatesLabel);
+    }
+
+    public void setSortButtonText(String string) {
+        sortButton.setText(string);
+    }
+
+    public void setShuffleButtonText(String string) {
+        shuffleButton.setText(string);
     }
 
     public int getArrSliderVal() {

@@ -20,8 +20,7 @@ public class CombSort extends IterativeWorker {
         int[] arr = vis.getArr();
         int gap = arr.length;
         float shrink = 1.3f;
-        int step = 0;
-        int updates = 0;
+        int step = 0, updates = 0;
         boolean loop = true;
         while (loop) {
             gap = (int) (gap / shrink);

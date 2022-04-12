@@ -18,13 +18,12 @@ public class OddEvenSort extends IterativeWorker {
 
     protected void sort(VisualizerPanel vis, int speed) {
         int[] arr = vis.getArr();
-        int index_len = arr.length - 1;
-        int step = 0;
-        int updates = 0;
+        int arrIndices = arr.length - 1;
+        int step = 0, updates = 0;
         boolean loop = true;
         while (loop) {
             loop = false;
-            for (int i = 1; i < index_len; i += 2) {
+            for (int i = 1; i < arrIndices; i += 2) {
                 if (worker.isCancelled()) return;
                 step++;
                 if (step >= speed) {
@@ -38,7 +37,7 @@ public class OddEvenSort extends IterativeWorker {
                     loop = true;
                 }
             }
-            for (int i = 0; i < index_len; i += 2) {
+            for (int i = 0; i < arrIndices; i += 2) {
                 if (worker.isCancelled()) return;
                 step++;
                 if (step >= speed) {

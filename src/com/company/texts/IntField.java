@@ -1,4 +1,4 @@
-package com.company.fields;
+package com.company.texts;
 
 import com.company.utils.ColorManager;
 import com.company.utils.IntDocFilter;

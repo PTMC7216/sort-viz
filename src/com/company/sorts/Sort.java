@@ -23,7 +23,7 @@ abstract class IterativeWorker extends Sort {
             @Override
             protected Void doInBackground() {
                 vis.setSorting(true);
-                con.sortButton.setText("Stop");
+                con.setSortButtonText("Stop");
                 con.setStatus("SORTING");
                 con.resetLabelUpdates();
                 sort(vis, speed);
@@ -34,6 +34,8 @@ abstract class IterativeWorker extends Sort {
                 for (Publisher p : chunks){
                     if (p.getCategory() == 0) {
                         con.updateArrLabel(p.getData());
+                    } else {
+                        con.updateSubArrLabel(p.getData());
                     }
                 }
             }
@@ -41,7 +43,7 @@ abstract class IterativeWorker extends Sort {
             protected void done() {
                 vis.resetHighlight();
                 vis.setSorting(false);
-                con.sortButton.setText("Sort");
+                con.setSortButtonText("Sort");
                 con.setStatus("IDLE");
                 vis.getQueue().poll();
             }
@@ -57,7 +59,7 @@ abstract class RecursiveWorker extends Sort {
             @Override
             protected Void doInBackground() {
                 vis.setSorting(true);
-                con.sortButton.setText("Stop");
+                con.setSortButtonText("Stop");
                 con.setStatus("SORTING");
                 con.resetLabelUpdates();
                 sort(vis, vis.getArr(), 0, -128, speed);
@@ -72,13 +74,12 @@ abstract class RecursiveWorker extends Sort {
                         con.updateSubArrLabel(p.getData());
                     }
                 }
-
             }
             @Override
             protected void done() {
                 vis.resetHighlight();
                 vis.setSorting(false);
-                con.sortButton.setText("Sort");
+                con.setSortButtonText("Sort");
                 con.setStatus("IDLE");
                 vis.getQueue().poll();
             }

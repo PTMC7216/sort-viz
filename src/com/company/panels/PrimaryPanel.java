@@ -2,6 +2,7 @@ package com.company.panels;
 
 import com.company.shuffles.DurstenfeldShuffle;
 import com.company.sorts.Sort;
+import com.company.utils.ColorManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +19,7 @@ public class PrimaryPanel extends JPanel {
     private int speed;
 
     public PrimaryPanel() {
-        setBackground(Color.GRAY);
+        setBackground(ColorManager.PRIMARY);
 
         con = new ControlPanel();
         vis = new VisualizerPanel();

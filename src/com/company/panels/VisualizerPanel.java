@@ -26,7 +26,7 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
     private final Sound sound;
 
     public VisualizerPanel() {
-        setBackground(Color.BLACK);
+        setBackground(ColorManager.QUATERNARY);
         addComponentListener(this);
         sound = new Sound(this);
     }
@@ -42,6 +42,10 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
     public void setArr(int arrSize) {
         this.arr = IntStream.rangeClosed(1, arrSize).toArray();
         this.highlight = new int[arrSize];
+    }
+
+    public void setArrCopy(int[] copied_arr) {
+        this.arr = copied_arr;
     }
 
     public void setVolume(int volume) {
@@ -116,8 +120,8 @@ public class VisualizerPanel extends JPanel implements ComponentListener {
         sound.stopNote(arr[i]);
     }
 
-    public void update(int i, int val) {
-        arr[i] = val;
+    public void update(int i, int j) {
+        arr[i] = j;
         highlight[i] = 1;
         sound.startNote(arr[i]);
         repaint();

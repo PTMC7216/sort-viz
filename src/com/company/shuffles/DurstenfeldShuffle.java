@@ -26,7 +26,7 @@ public class DurstenfeldShuffle {
             @Override
             protected Void doInBackground() {
                 vis.setShuffling(true);
-                con.shuffleButton.setText("Stop");
+                con.setShuffleButtonText("Stop");
                 con.setStatus("SHUFFLING");
                 con.resetLabelUpdates();
                 shuffle(vis, speed);
@@ -44,7 +44,7 @@ public class DurstenfeldShuffle {
             protected void done() {
                 vis.resetHighlight();
                 vis.setShuffling(false);
-                con.shuffleButton.setText("Shuffle");
+                con.setShuffleButtonText("Shuffle");
                 con.setStatus("IDLE");
             }
         };

@@ -1,6 +1,6 @@
 package com.company.sliders;
 
-import com.company.fields.IntField;
+import com.company.texts.IntField;
 import com.company.utils.ColorManager;
 import com.company.utils.FontManager;
 

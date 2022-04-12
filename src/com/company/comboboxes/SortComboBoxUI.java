@@ -5,8 +5,7 @@ import com.company.utils.FontManager;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
-import javax.swing.plaf.basic.BasicArrowButton;
-import javax.swing.plaf.basic.BasicComboBoxUI;
+import javax.swing.plaf.basic.*;
 import java.awt.*;
 
 public class SortComboBoxUI extends BasicComboBoxUI {
@@ -19,56 +18,78 @@ public class SortComboBoxUI extends BasicComboBoxUI {
     @Override
     protected void installDefaults() {
         super.installDefaults();
-
         LookAndFeel.uninstallBorder(comboBox);
+        comboBox.setRenderer(new Renderer());
         comboBox.setBorder(BorderFactory.createLineBorder(ColorManager.PRIMARY, 1));
-
         Color sharedBackground = ColorManager.SECONDARY;
         UIManager.put("ComboBox.selectionBackground", new ColorUIResource(sharedBackground));
         UIManager.put("ComboBox.background", new ColorUIResource(sharedBackground));
-
-        comboBox.setRenderer(new Renderer());
 
     }
 
     @Override
     protected JButton createArrowButton() {
-        UIManager.put("ComboBox.buttonBackground", new ColorUIResource(ColorManager.SECONDARY));
-        UIManager.put("ComboBox.buttonShadow", new ColorUIResource(ColorManager.PRIMARY));
-        UIManager.put("ComboBox.buttonDarkShadow", new ColorUIResource(Color.BLACK));
-        UIManager.put("ComboBox.buttonHighlight", new ColorUIResource(ColorManager.TERTIARY));
-
-        JButton button = new BasicArrowButton(BasicArrowButton.SOUTH,
-                UIManager.getColor("ComboBox.buttonBackground"),
-                UIManager.getColor("ComboBox.buttonShadow"),
-                UIManager.getColor("ComboBox.buttonDarkShadow"),
-                UIManager.getColor("ComboBox.buttonHighlight"));
-        button.setName("ComboBox.arrowButton");
-
-        return button;
+        return directionalButton(BasicArrowButton.SOUTH);
     }
 
     private static class Renderer extends DefaultListCellRenderer {
-
-        public Component getListCellRendererComponent(JList list,
-                                                      Object value,
-                                                      int index,
-                                                      boolean isSelected,
-                                                      boolean cellHasFocus) {
-
+        public Component getListCellRendererComponent(JList list, Object value, int index,
+                                                      boolean isSelected, boolean cellHasFocus) {
             super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-
             setHorizontalAlignment(CENTER);
-
             if (isSelected) {
                 setBackground(ColorManager.PRIMARY);
-            }
-            else {
+            } else {
                 setBackground(ColorManager.SECONDARY);
             }
-
             return this;
         }
+    }
+
+    @Override
+    protected ComboPopup createPopup() {
+        return new BasicComboPopup(comboBox) {
+            @Override
+            protected JScrollPane createScroller() {
+                JScrollPane scroller = new JScrollPane(list,
+                        JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                        JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+                scroller.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+                    @Override
+                    protected void configureScrollBarColors() {
+                        thumbHighlightColor = ColorManager.TERTIARY;
+                        thumbLightShadowColor = ColorManager.PRIMARY;
+                        thumbDarkShadowColor = ColorManager.QUATERNARY;
+                        thumbColor = ColorManager.SECONDARY;
+                        trackColor = ColorManager.SECONDARY;
+                    }
+                    @Override
+                    protected JButton createDecreaseButton(int orientation) {
+                        return directionalButton(BasicArrowButton.NORTH);
+                    }
+                    @Override
+                    protected JButton createIncreaseButton(int orientation) {
+                        return directionalButton(BasicArrowButton.SOUTH);
+                    }
+                    @Override
+                    public Dimension getPreferredSize(JComponent c) {
+                        return new Dimension(16, super.getPreferredSize(c).height);
+                    }
+                });
+                return scroller;
+            }
+        };
+    }
+
+    private JButton directionalButton(int orientation) {
+        JButton button = new BasicArrowButton(orientation,
+                ColorManager.SECONDARY,
+                ColorManager.PRIMARY,
+                ColorManager.QUATERNARY,
+                ColorManager.TERTIARY);
+        button.setName("ComboBox.arrowButton");
+        return button;
     }
 
 }
