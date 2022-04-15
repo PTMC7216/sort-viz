@@ -12,10 +12,12 @@ public class SortComboBox extends JComboBox<String> {
         setUI(new SortComboBoxUI(this));
 
         String[] items = {
+                "Bitonic sort",
                 "Bubble sort",
                 "Comb sort",
                 "Counting sort",
                 "Gravity sort",
+                "Insertion sort",
                 "Merge sort",
                 "Odd-even sort",
                 "Quicksort",
@@ -34,6 +36,8 @@ public class SortComboBox extends JComboBox<String> {
 
     public Sort getSort() {
         switch (selected) {
+            case "Bitonic sort":
+                return BitonicSort.getInstance();
             case "Bubble sort":
                 return BubbleSort.getInstance();
             case "Comb sort":
@@ -42,6 +46,8 @@ public class SortComboBox extends JComboBox<String> {
                 return CountingSort.getInstance();
             case "Gravity sort":
                 return GravitySort.getInstance();
+            case "Insertion sort":
+                return InsertionSort.getInstance();
             case "Merge sort":
                 return MergeSort.getInstance();
             case "Odd-even sort":
