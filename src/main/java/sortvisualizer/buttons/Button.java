@@ -15,7 +15,7 @@ public abstract class Button extends JButton {
         setBorder(BorderFactory.createBevelBorder(0));
 
         setFont(FontManager.PRIMARY);
-        setFocusable(false);
+        setFocusPainted(false);
     }
 
 }
