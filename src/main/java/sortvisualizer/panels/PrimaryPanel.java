@@ -42,11 +42,11 @@ public class PrimaryPanel extends JPanel {
             if (vis.getSorting()) {
                 queue.element().stop();
             } else {
-                 if (vis.getArr().length != con.getArrSliderVal()) {
+                 if (vis.getArr().length != con.getArrSliderVal(sort.toString())) {
                      if (vis.getShuffling()) {
                          shuffle.stop();
                      } else {
-                         vis.setArr(con.getArrSliderVal());
+                         vis.setArr(con.getArrSliderVal(sort.toString()));
                          shuffle.start(vis, con, speed);
                      }
                 } else if (vis.isSorted()) {

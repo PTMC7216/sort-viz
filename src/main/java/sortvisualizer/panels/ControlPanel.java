@@ -84,6 +84,10 @@ public class ControlPanel extends JPanel {
         return arrSlider.getValue();
     }
 
+    public int getArrSliderVal(String name) {
+        return arrSlider.getRestrictedValue(name);
+    }
+
     public void setStatus(String status) {
         statusLabel.setStatus(status);
     }

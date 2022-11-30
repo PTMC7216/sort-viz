@@ -12,7 +12,7 @@ public class GitVersionLabel extends JLabel {
         setPreferredSize(new Dimension(50, 22));
         setVerticalAlignment(SwingConstants.BOTTOM);
         setFocusable(false);
-        setText("v0.1.0");
+        setText("v0.1.1");
     }
 
 }

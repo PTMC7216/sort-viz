@@ -9,4 +9,13 @@ public class ArrSlider extends Slider {
         setValue(2048);
     }
 
+    public int getRestrictedValue(String name) {
+        int value = this.getValue();
+        if (name.contains("Bitonic")) {
+            int i = Integer.highestOneBit(value);
+            this.setValue(value > i ? i << 1 : i);
+        }
+        return value;
+    }
+
 }

@@ -8,7 +8,6 @@ public class BitonicSort extends RecursiveWorker {
     private static BitonicSort instance = null;
     private int updates;
 
-    // TODO: Restrict array sizes to powers of 2
     private BitonicSort() {}
 
     public static BitonicSort getInstance() {
