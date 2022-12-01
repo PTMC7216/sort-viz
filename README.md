@@ -11,7 +11,7 @@ A Java-powered graphic and audio representation of various sorting algorithms.
 
 ## Installation
 
-Download the most recent pre-built JAR or ZIP from GitHub Releases.
+Download the latest pre-built JAR or ZIP from [GitHub Releases](https://github.com/PTMC7216/sort-viz/releases).
 
 The JAR requires a [Java SE Development Kit](https://www.oracle.com/java/technologies/downloads/#java17) to run.
 
